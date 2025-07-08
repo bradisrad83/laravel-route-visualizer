@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
 test('route visualizer page loads with or without routes', function () {
@@ -10,7 +11,7 @@ test('route visualizer page loads with or without routes', function () {
     $response->assertSee('HTTP Methods:');
     $response->assertSee('Middleware:');
 
-    $routes = Route::getRoutes();   
+    $routes = Route::getRoutes();
     if ($routes->count() === 0) {
         $response->assertSee('No routes match your filters');
     } else {

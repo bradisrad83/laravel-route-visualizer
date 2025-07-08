@@ -5,7 +5,6 @@ namespace bradisrad83\LaravelRouteVisualizer\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
 
-
 class RouteVisualizerController extends Controller
 {
     public function index()
@@ -14,8 +13,8 @@ class RouteVisualizerController extends Controller
         $allRoutes = collect(Route::getRoutes());
 
         $groupedRoutes = [
-            'Web'   => [],
-            'API'   => [],
+            'Web' => [],
+            'API' => [],
             'Other' => [],
         ];
 
@@ -25,10 +24,10 @@ class RouteVisualizerController extends Controller
                      ($middleware->contains('api') ? 'API' : 'Other');
 
             $groupedRoutes[$group][] = [
-                'method'     => implode('|', $route->methods()),
-                'uri'        => $route->uri(),
-                'name'       => $route->getName(),
-                'action'     => $route->getActionName(),
+                'method' => implode('|', $route->methods()),
+                'uri' => $route->uri(),
+                'name' => $route->getName(),
+                'action' => $route->getActionName(),
                 'middleware' => implode(', ', $route->middleware()),
             ];
         }
