@@ -2,9 +2,9 @@
 
 namespace bradisrad83\LaravelRouteVisualizer\Tests;
 
+use bradisrad83\LaravelRouteVisualizer\LaravelRouteVisualizerServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use bradisrad83\LaravelRouteVisualizer\LaravelRouteVisualizerServiceProvider;
 
 class TestCase extends Orchestra
 {

@@ -4,7 +4,6 @@ namespace bradisrad83\LaravelRouteVisualizer;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use bradisrad83\LaravelRouteVisualizer\Commands\LaravelRouteVisualizerCommand;
 
 class LaravelRouteVisualizerServiceProvider extends PackageServiceProvider
 {
