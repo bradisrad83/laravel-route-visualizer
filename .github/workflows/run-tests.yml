@@ -24,12 +24,14 @@ jobs:
         laravel: [11.*, 10.*]
         stability: [prefer-stable, prefer-lowest]
         include:
-          - laravel: 11.*
-            testbench: 9.*
-            pest: ^3.0
-          - laravel: 10.*
-            testbench: 8.*
-            pest: ^2.0
+        - laravel: 11.*
+          testbench: 9.*
+          pest-plugin: ^3.0
+          pest-core: ^3.0
+        - laravel: 10.*
+          testbench: 8.*
+          pest-plugin: ^2.0
+          pest-core: ^2.0
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.stability }}
 
@@ -49,9 +51,12 @@ jobs:
           composer require \
             "laravel/framework:${{ matrix.laravel }}" \
             "orchestra/testbench:${{ matrix.testbench }}" \
-            "pestphp/pest-plugin-laravel:${{ matrix.pest }}" \
+            "pestphp/pest:${{ matrix.pest-core }}" \
+            "pestphp/pest-plugin-laravel:${{ matrix.pest-plugin }}" \
             --no-interaction --no-update
+
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
 
       - name: Prepare package
         run: composer run prepare
