@@ -22,12 +22,14 @@ jobs:
       matrix:
         php: [8.2, 8.3, 8.4]
         laravel: [11.*, 10.*]
-        stability: [prefer-lowest, prefer-stable]
+        stability: [prefer-stable, prefer-lowest]
         include:
           - laravel: 11.*
             testbench: 9.*
+            pest: ^3.0
           - laravel: 10.*
             testbench: 8.*
+            pest: ^2.0
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.stability }}
 
@@ -44,7 +46,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require \
+            "laravel/framework:${{ matrix.laravel }}" \
+            "orchestra/testbench:${{ matrix.testbench }}" \
+            "pestphp/pest-plugin-laravel:${{ matrix.pest }}" \
+            --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Prepare package
