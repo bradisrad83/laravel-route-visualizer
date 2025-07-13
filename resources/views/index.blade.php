@@ -57,29 +57,32 @@
                 <div class="mt-10">
                     <h2 class="text-xl font-semibold mb-4 border-b pb-2" x-text="group + ' Routes'"></h2>
 
+                    <!-- Scrollable Table Container -->
                     <div class="overflow-x-auto">
-                        <table class="w-full table-auto border-collapse shadow rounded-lg overflow-hidden bg-white mb-8">
-                            <thead class="bg-gray-100 text-left">
-                                <tr>
-                                    <th class="px-4 py-2 border-b">Method</th>
-                                    <th class="px-4 py-2 border-b">URI</th>
-                                    <th class="px-4 py-2 border-b">Name</th>
-                                    <th class="px-4 py-2 border-b">Action</th>
-                                    <th class="px-4 py-2 border-b">Middleware</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <template x-for="(route, index) in routes" :key="index">
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="px-4 py-2 border-b font-mono text-sm text-blue-600" x-text="route.method"></td>
-                                        <td class="px-4 py-2 border-b font-mono text-sm" x-text="route.uri"></td>
-                                        <td class="px-4 py-2 border-b font-mono text-sm text-gray-500" x-text="route.name || '-'"></td>
-                                        <td class="px-4 py-2 border-b font-mono text-sm" x-text="route.action"></td>
-                                        <td class="px-4 py-2 border-b font-mono text-sm text-gray-600" x-text="route.middleware"></td>
+                        <div class="max-h-[500px] overflow-y-auto rounded-lg border border-gray-200">
+                            <table class="w-full table-auto border-collapse bg-white">
+                                <thead class="bg-gray-100 text-left sticky top-0 z-10">
+                                    <tr>
+                                        <th class="px-4 py-2 border-b">Method</th>
+                                        <th class="px-4 py-2 border-b">URI</th>
+                                        <th class="px-4 py-2 border-b">Name</th>
+                                        <th class="px-4 py-2 border-b">Action</th>
+                                        <th class="px-4 py-2 border-b">Middleware</th>
                                     </tr>
-                                </template>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <template x-for="(route, index) in routes" :key="index">
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-4 py-2 border-b font-mono text-sm text-blue-600" x-text="route.method"></td>
+                                            <td class="px-4 py-2 border-b font-mono text-sm" x-text="route.uri"></td>
+                                            <td class="px-4 py-2 border-b font-mono text-sm text-gray-500" x-text="route.name || '-'"></td>
+                                            <td class="px-4 py-2 border-b font-mono text-sm" x-text="route.action"></td>
+                                            <td class="px-4 py-2 border-b font-mono text-sm text-gray-600" x-text="route.middleware"></td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </template>
