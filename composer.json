@@ -1,6 +1,5 @@
 {
     "name": "bradisrad83/laravel-route-visualizer",
-    "version": "1.0.1",
     "description": "A Laravel package for visualizing your registered routes — complete with filtering by HTTP method, middleware, and search functionality. Designed to be elegant and fast, powered by Alpine.js and Tailwind CSS.",
     "keywords": [
         "Brad Goldsmith",
@@ -40,8 +39,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "bradisrad83\\LaravelRouteVisualizer\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
+            "bradisrad83\\LaravelRouteVisualizer\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -63,10 +61,7 @@
         "laravel": {
             "providers": [
                 "bradisrad83\\LaravelRouteVisualizer\\LaravelRouteVisualizerServiceProvider"
-            ],
-            "aliases": {
-                "LaravelRouteVisualizer": "bradisrad83\\LaravelRouteVisualizer\\Facades\\LaravelRouteVisualizer"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

@@ -1,12 +1,11 @@
 includes:
-    - phpstan-baseline.neon
+  - ./vendor/larastan/larastan/extension.neon
+  - ./vendor/phpstan/phpstan/conf/bleedingEdge.neon
+  - ./phpstan-baseline.neon
 
 parameters:
-    level: 5
-    paths:
-        - src
-        - config
-        - database
-    tmpDir: build/phpstan
-    checkOctaneCompatibility: true
-    checkModelProperties: true
+  level: max
+  tmpDir: build/phpstan
+  checkOctaneCompatibility: true
+  paths:
+    - src

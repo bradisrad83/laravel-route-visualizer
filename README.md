@@ -14,7 +14,7 @@
 You can install the package via composer:
 
 ```bash
-composer require bradisrad83/laravel-route-visualizer
+composer require bradisrad83/laravel-route-visualizer --dev
 ```
 
 ```bash

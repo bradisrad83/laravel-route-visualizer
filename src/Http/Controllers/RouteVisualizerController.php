@@ -2,39 +2,34 @@
 
 namespace bradisrad83\LaravelRouteVisualizer\Http\Controllers;
 
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Contracts\View\View;
 
-class RouteVisualizerController extends Controller
+class RouteVisualizerController
 {
-    public function index()
+    public function __invoke(): View
     {
+        $groupedRoutes = collect(Route::getRoutes())
+            ->map(function ($route): array {
+                $middleware = $route->middleware();
 
-        $allRoutes = collect(Route::getRoutes());
+                $group = in_array('web', $middleware) ? 'Web'
+                    : (in_array('api', $middleware) ? 'API' : 'Other');
 
-        $groupedRoutes = [
-            'Web' => [],
-            'API' => [],
-            'Other' => [],
-        ];
-
-        foreach ($allRoutes as $route) {
-            $middleware = collect($route->middleware());
-            $group = $middleware->contains('web') ? 'Web' :
-                     ($middleware->contains('api') ? 'API' : 'Other');
-
-            $groupedRoutes[$group][] = [
-                'method' => implode('|', $route->methods()),
-                'uri' => $route->uri(),
-                'name' => $route->getName(),
-                'action' => $route->getActionName(),
-                'middleware' => implode(', ', $route->middleware()),
-            ];
-        }
+                return [
+                    'group' => $group,
+                    'method' => implode('|', $route->methods()),
+                    'uri' => $route->uri(),
+                    'name' => $route->getName(),
+                    'action' => $route->getActionName(),
+                    'middleware' => implode(', ', $middleware),
+                ];
+            })
+            ->groupBy('group')
+            ->toArray();
 
         return view('route-visualizer::index', [
             'groupedRoutes' => $groupedRoutes,
-            'csrfToken' => csrf_token(),
         ]);
     }
 }
