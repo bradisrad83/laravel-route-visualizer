@@ -3,8 +3,8 @@
 namespace bradisrad83\LaravelRouteVisualizer\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Route as LaravelRoute;
+use Illuminate\Support\Facades\Route;
 
 class RouteVisualizerController
 {
@@ -33,7 +33,6 @@ class RouteVisualizerController
             })
             ->groupBy('group')
             ->toArray();
-
 
         return view('route-visualizer::index', [
             'groupedRoutes' => $groupedRoutes,
