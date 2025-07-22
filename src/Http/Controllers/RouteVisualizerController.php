@@ -2,8 +2,8 @@
 
 namespace bradisrad83\LaravelRouteVisualizer\Http\Controllers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Route;
 
 class RouteVisualizerController
 {
