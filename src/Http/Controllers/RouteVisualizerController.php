@@ -4,17 +4,23 @@ namespace bradisrad83\LaravelRouteVisualizer\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Route as LaravelRoute;
 
 class RouteVisualizerController
 {
     public function __invoke(): View
     {
-        $groupedRoutes = collect(Route::getRoutes())
-            ->map(function ($route): array {
+        $routes = iterator_to_array(Route::getRoutes()->getIterator());
+
+        $groupedRoutes = collect($routes)
+            ->map(function (LaravelRoute $route): array {
                 $middleware = $route->middleware();
 
-                $group = in_array('web', $middleware) ? 'Web'
-                    : (in_array('api', $middleware) ? 'API' : 'Other');
+                // Ensure middleware is an array
+                $middlewareArray = is_array($middleware) ? $middleware : [];
+
+                $group = in_array('web', $middlewareArray) ? 'Web'
+                    : (in_array('api', $middlewareArray) ? 'API' : 'Other');
 
                 return [
                     'group' => $group,
@@ -22,11 +28,12 @@ class RouteVisualizerController
                     'uri' => $route->uri(),
                     'name' => $route->getName(),
                     'action' => $route->getActionName(),
-                    'middleware' => implode(', ', $middleware),
+                    'middleware' => implode(', ', $middlewareArray),
                 ];
             })
             ->groupBy('group')
             ->toArray();
+
 
         return view('route-visualizer::index', [
             'groupedRoutes' => $groupedRoutes,
